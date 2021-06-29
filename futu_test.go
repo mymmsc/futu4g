@@ -1,6 +1,7 @@
 package futu4g
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/mymmsc/futu4g/api"
 	"github.com/mymmsc/futu4g/protocol/Qot_Common"
@@ -36,4 +37,18 @@ func Test(t *testing.T) {
 	}
 	response := <-ch
 	fmt.Printf("data = %v\n", response)
+	var basicList []Qot_Common.SecurityStaticBasic
+	infoList := response.S2C.StaticInfoList
+	for _, item := range infoList {
+		if item.Basic == nil {
+			continue
+		}
+		basicList = append(basicList, *item.Basic)
+	}
+	fmt.Print("---------------------------------\n")
+	data, err := json.Marshal(basicList)
+	if err == nil {
+		fmt.Printf("%s", data);
+	}
+
 }
