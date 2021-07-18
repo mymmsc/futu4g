@@ -20,9 +20,9 @@ func Test(t *testing.T) {
 	}
 	defer cli.Close()
 	// 2. 查询
-	market := Qot_Common.QotMarket_QotMarket_CNSH_Security
+	market := Qot_Common.QotMarket_QotMarket_CNSZ_Security
 	marketInt32 := int32(market)
-	secType := Qot_Common.SecurityType_SecurityType_Eqty
+	secType := Qot_Common.SecurityType_SecurityType_Index
 	secTypeInt32 := int32(secType)
 	req := Qot_GetStaticInfo.Request{
 		C2S: &Qot_GetStaticInfo.C2S{
@@ -36,7 +36,7 @@ func Test(t *testing.T) {
 		fmt.Printf("NewFutuAPI err: %v\n", err)
 	}
 	response := <-ch
-	fmt.Printf("data = %v\n", response)
+	//fmt.Printf("data = %v\n", response)
 	var basicList []Qot_Common.SecurityStaticBasic
 	infoList := response.S2C.StaticInfoList
 	for _, item := range infoList {
